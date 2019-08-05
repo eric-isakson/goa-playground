@@ -66,9 +66,9 @@ func NewSigninPayload() *securedservice.SigninPayload {
 }
 
 // NewSecurePayload builds a secured_service service secure endpoint payload.
-func NewSecurePayload(fail *bool, token string) *securedservice.SecurePayload {
+func NewSecurePayload(test *string, token string) *securedservice.SecurePayload {
 	return &securedservice.SecurePayload{
-		Fail:  fail,
+		Test:  test,
 		Token: token,
 	}
 }

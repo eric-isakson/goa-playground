@@ -47,9 +47,5 @@ func (s *securedServiceSvc) Signin(ctx context.Context, p *securedservice.Signin
 func (s *securedServiceSvc) Secure(ctx context.Context, p *securedservice.SecurePayload) (res string, err error) {
 	res = fmt.Sprintf("User authorized using JWT token %q", p.Token)
 	s.logger.Printf(res)
-	if p.Fail != nil && *p.Fail {
-		s.logger.Printf("Uh oh! `fail` passed in parameter. Auth failed!")
-		return "", securedservice.Unauthorized("forced authentication failure")
-	}
 	return
 }

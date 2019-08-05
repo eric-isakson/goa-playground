@@ -61,6 +61,7 @@ github.com/stretchr/testify v1.3.0 h1:TivCn/peBQ7UY8ooIcPgZFpTNSz0Q2U6UrFlUfqbe0
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/zach-klippenstein/goregen v0.0.0-20160303162051-795b5e3961ea h1:CyhwejzVGvZ3Q2PSbQ4NRRYn+ZWv5eS1vlaEusT+bAI=
 github.com/zach-klippenstein/goregen v0.0.0-20160303162051-795b5e3961ea/go.mod h1:eNr558nEUjP8acGw8FFjTeWvSgU1stO7FAO6eknhHe4=
+goa.design/goa v2.0.3+incompatible h1:X4BaL6USoeT2IBqn/f6p3Mx54J1m/7rAjRUUMxFyCcM=
 goa.design/goa/v3 v3.0.3 h1:pqkqj94BJIY+zE6pQUf1KkSRrWsFi/szgOXG+ZilSyE=
 goa.design/goa/v3 v3.0.3/go.mod h1:QNvl0ud+fmryqCOvt/WiwTrNOYtv4+sfAtYFJ6+ReFo=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=

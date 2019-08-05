@@ -8,9 +8,6 @@
 package client
 
 import (
-	"fmt"
-	"strconv"
-
 	securedservice "github.com/eric-isakson/goa-playground/gen/secured_service"
 )
 
@@ -34,17 +31,11 @@ func BuildSigninPayload(securedServiceSigninUsername string, securedServiceSigni
 
 // BuildSecurePayload builds the payload for the secured_service secure
 // endpoint from CLI flags.
-func BuildSecurePayload(securedServiceSecureFail string, securedServiceSecureToken string) (*securedservice.SecurePayload, error) {
-	var err error
-	var fail *bool
+func BuildSecurePayload(securedServiceSecureTest string, securedServiceSecureToken string) (*securedservice.SecurePayload, error) {
+	var test *string
 	{
-		if securedServiceSecureFail != "" {
-			var val bool
-			val, err = strconv.ParseBool(securedServiceSecureFail)
-			fail = &val
-			if err != nil {
-				return nil, fmt.Errorf("invalid value for fail, must be BOOL")
-			}
+		if securedServiceSecureTest != "" {
+			test = &securedServiceSecureTest
 		}
 	}
 	var token string
@@ -52,7 +43,7 @@ func BuildSecurePayload(securedServiceSecureFail string, securedServiceSecureTok
 		token = securedServiceSecureToken
 	}
 	payload := &securedservice.SecurePayload{
-		Fail:  fail,
+		Test:  test,
 		Token: token,
 	}
 	return payload, nil

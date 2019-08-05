@@ -10,7 +10,6 @@ package client
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -125,8 +124,8 @@ func EncodeSecureRequest(encoder func(*http.Request) goahttp.Encoder) func(*http
 		}
 		req.Header.Set("Authorization", p.Token)
 		values := req.URL.Query()
-		if p.Fail != nil {
-			values.Add("fail", fmt.Sprintf("%v", *p.Fail))
+		if p.Test != nil {
+			values.Add("test", *p.Test)
 		}
 		req.URL.RawQuery = values.Encode()
 		return nil

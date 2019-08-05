@@ -96,8 +96,9 @@ var _ = Service("secured_service", func() {
 		})
 
 		Payload(func() {
-			Field(1, "fail", Boolean, func() {
-				Description("Whether to force auth failure even with a valid JWT")
+			Field(1, "test", String, func() {
+				Description("Are these exposed for unauthenticated requests?")
+				Enum("exposed", "enum", "values")
 			})
 			TokenField(2, "token", String, func() {
 				Description("JWT used for authentication")
@@ -111,7 +112,7 @@ var _ = Service("secured_service", func() {
 
 		HTTP(func() {
 			GET("/secure")
-			Param("fail")
+			Param("test")
 			Response(StatusOK)
 			Response("invalid-scopes", StatusForbidden)
 		})

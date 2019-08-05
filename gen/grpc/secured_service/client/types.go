@@ -32,8 +32,8 @@ func NewSigninResult(message *secured_servicepb.SigninResponse) *securedservice.
 // "secure" endpoint of the "secured_service" service.
 func NewSecureRequest(payload *securedservice.SecurePayload) *secured_servicepb.SecureRequest {
 	message := &secured_servicepb.SecureRequest{}
-	if payload.Fail != nil {
-		message.Fail = *payload.Fail
+	if payload.Test != nil {
+		message.Test = *payload.Test
 	}
 	return message
 }

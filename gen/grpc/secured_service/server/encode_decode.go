@@ -95,6 +95,9 @@ func DecodeSecureRequest(ctx context.Context, v interface{}, md metadata.MD) (in
 		if message, ok = v.(*secured_servicepb.SecureRequest); !ok {
 			return nil, goagrpc.ErrInvalidType("secured_service", "secure", "*secured_servicepb.SecureRequest", v)
 		}
+		if err = ValidateSecureRequest(message); err != nil {
+			return nil, err
+		}
 	}
 	var payload *securedservice.SecurePayload
 	{

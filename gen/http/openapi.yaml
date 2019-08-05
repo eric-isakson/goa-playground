@@ -25,11 +25,15 @@ paths:
           * `api:read`
       operationId: secured_service#secure
       parameters:
-      - name: fail
+      - name: test
         in: query
-        description: Whether to force auth failure even with a valid JWT
+        description: Are these exposed for unauthenticated requests?
         required: false
-        type: boolean
+        type: string
+        enum:
+        - exposed
+        - enum
+        - values
       - name: Authorization
         in: header
         description: JWT used for authentication

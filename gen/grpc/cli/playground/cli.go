@@ -167,7 +167,7 @@ This action is secured with the jwt scheme
 
 Example:
     `+os.Args[0]+` secured-service secure --message '{
-      "fail": true
+      "test": "values"
    }' --token "Nemo id occaecati molestias."
 `, os.Args[0])
 }

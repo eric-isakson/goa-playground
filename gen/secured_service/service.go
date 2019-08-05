@@ -57,8 +57,8 @@ type Creds struct {
 // SecurePayload is the payload type of the secured_service service secure
 // method.
 type SecurePayload struct {
-	// Whether to force auth failure even with a valid JWT
-	Fail *bool
+	// Are these exposed for unauthenticated requests?
+	Test *string
 	// JWT used for authentication
 	Token string
 }

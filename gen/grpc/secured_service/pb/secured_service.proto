@@ -29,8 +29,8 @@ message SigninResponse {
 }
 
 message SecureRequest {
-	// Whether to force auth failure even with a valid JWT
-	bool fail = 1;
+	// Are these exposed for unauthenticated requests?
+	string test = 1;
 }
 
 message SecureResponse {

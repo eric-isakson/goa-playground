@@ -10,7 +10,6 @@ package server
 import (
 	"context"
 	"net/http"
-	"strconv"
 	"strings"
 
 	securedservice "github.com/eric-isakson/goa-playground/gen/secured_service"
@@ -86,18 +85,17 @@ func EncodeSecureResponse(encoder func(context.Context, http.ResponseWriter) goa
 func DecodeSecureRequest(mux goahttp.Muxer, decoder func(*http.Request) goahttp.Decoder) func(*http.Request) (interface{}, error) {
 	return func(r *http.Request) (interface{}, error) {
 		var (
-			fail  *bool
+			test  *string
 			token string
 			err   error
 		)
-		{
-			failRaw := r.URL.Query().Get("fail")
-			if failRaw != "" {
-				v, err2 := strconv.ParseBool(failRaw)
-				if err2 != nil {
-					err = goa.MergeErrors(err, goa.InvalidFieldTypeError("fail", failRaw, "boolean"))
-				}
-				fail = &v
+		testRaw := r.URL.Query().Get("test")
+		if testRaw != "" {
+			test = &testRaw
+		}
+		if test != nil {
+			if !(*test == "exposed" || *test == "enum" || *test == "values") {
+				err = goa.MergeErrors(err, goa.InvalidEnumValueError("test", *test, []interface{}{"exposed", "enum", "values"}))
 			}
 		}
 		token = r.Header.Get("Authorization")
@@ -107,7 +105,7 @@ func DecodeSecureRequest(mux goahttp.Muxer, decoder func(*http.Request) goahttp.
 		if err != nil {
 			return nil, err
 		}
-		payload := NewSecurePayload(fail, token)
+		payload := NewSecurePayload(test, token)
 		if strings.Contains(payload.Token, " ") {
 			// Remove authorization scheme prefix (e.g. "Bearer")
 			cred := strings.SplitN(payload.Token, " ", 2)[1]

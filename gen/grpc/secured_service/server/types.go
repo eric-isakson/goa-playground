@@ -10,6 +10,7 @@ package server
 import (
 	secured_servicepb "github.com/eric-isakson/goa-playground/gen/grpc/secured_service/pb"
 	securedservice "github.com/eric-isakson/goa-playground/gen/secured_service"
+	goa "goa.design/goa/v3/pkg"
 )
 
 // NewSigninPayload builds the payload of the "signin" endpoint of the
@@ -33,8 +34,9 @@ func NewSigninResponse(result *securedservice.Creds) *secured_servicepb.SigninRe
 // NewSecurePayload builds the payload of the "secure" endpoint of the
 // "secured_service" service from the gRPC request type.
 func NewSecurePayload(message *secured_servicepb.SecureRequest, token string) *securedservice.SecurePayload {
-	v := &securedservice.SecurePayload{
-		Fail: &message.Fail,
+	v := &securedservice.SecurePayload{}
+	if message.Test != "" {
+		v.Test = &message.Test
 	}
 	v.Token = token
 	return v
@@ -46,4 +48,14 @@ func NewSecureResponse(result string) *secured_servicepb.SecureResponse {
 	message := &secured_servicepb.SecureResponse{}
 	message.Field = result
 	return message
+}
+
+// ValidateSecureRequest runs the validations defined on SecureRequest.
+func ValidateSecureRequest(message *secured_servicepb.SecureRequest) (err error) {
+	if message.Test != "" {
+		if !(message.Test == "exposed" || message.Test == "enum" || message.Test == "values") {
+			err = goa.MergeErrors(err, goa.InvalidEnumValueError("message.test", message.Test, []interface{}{"exposed", "enum", "values"}))
+		}
+	}
+	return
 }

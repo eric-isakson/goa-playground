@@ -50,7 +50,7 @@ func ParseEndpoint(
 		securedServiceSigninPasswordFlag = securedServiceSigninFlags.String("password", "REQUIRED", "Password used to perform signin")
 
 		securedServiceSecureFlags     = flag.NewFlagSet("secure", flag.ExitOnError)
-		securedServiceSecureFailFlag  = securedServiceSecureFlags.String("fail", "", "")
+		securedServiceSecureTestFlag  = securedServiceSecureFlags.String("test", "", "")
 		securedServiceSecureTokenFlag = securedServiceSecureFlags.String("token", "REQUIRED", "")
 	)
 	securedServiceFlags.Usage = securedServiceUsage
@@ -127,7 +127,7 @@ func ParseEndpoint(
 				data, err = securedservicec.BuildSigninPayload(*securedServiceSigninUsernameFlag, *securedServiceSigninPasswordFlag)
 			case "secure":
 				endpoint = c.Secure()
-				data, err = securedservicec.BuildSecurePayload(*securedServiceSecureFailFlag, *securedServiceSecureTokenFlag)
+				data, err = securedservicec.BuildSecurePayload(*securedServiceSecureTestFlag, *securedServiceSecureTokenFlag)
 			}
 		}
 	}
@@ -166,13 +166,13 @@ Example:
 }
 
 func securedServiceSecureUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] secured-service secure -fail BOOL -token STRING
+	fmt.Fprintf(os.Stderr, `%s [flags] secured-service secure -test STRING -token STRING
 
 This action is secured with the jwt scheme
-    -fail BOOL: 
+    -test STRING: 
     -token STRING: 
 
 Example:
-    `+os.Args[0]+` secured-service secure --fail true --token "Autem omnis officia in rerum repellendus."
+    `+os.Args[0]+` secured-service secure --test "values" --token "Autem omnis officia in rerum repellendus."
 `, os.Args[0])
 }
