@@ -1,0 +1,16 @@
+/*
+
+!/cmd/
+!/design/
+!/gen/
+!/.gitignore
+!/.golint_exclude
+!/.travis.yml
+!/auth.go
+!/go.mod
+!/go.sum
+!/LICENSE
+!/Makefile
+!/NOTICE
+!/README.md
+!/secured_service.go

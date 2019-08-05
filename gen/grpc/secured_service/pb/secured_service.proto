@@ -1,0 +1,38 @@
+// Code generated with goa v3.0.3, DO NOT EDIT.
+//
+// secured_service protocol buffer definition
+//
+// Command:
+// $ goa gen github.com/eric-isakson/goa-playground/design
+
+syntax = "proto3";
+
+package secured_service;
+
+option go_package = "secured_servicepb";
+
+// The secured service exposes endpoints that require valid authorization
+// credentials.
+service SecuredService {
+	// Creates a valid JWT
+	rpc Signin (SigninRequest) returns (SigninResponse);
+	// This action is secured with the jwt scheme
+	rpc Secure (SecureRequest) returns (SecureResponse);
+}
+
+message SigninRequest {
+}
+
+message SigninResponse {
+	// JWT token
+	string jwt = 1;
+}
+
+message SecureRequest {
+	// Whether to force auth failure even with a valid JWT
+	bool fail = 1;
+}
+
+message SecureResponse {
+	string field = 1;
+}
